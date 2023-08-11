@@ -27,6 +27,7 @@ namespace GameAssets.Scripts.Player
             rb = GetComponent<Rigidbody2D>();
             HandleMovement();
             LimitFallSpeed();
+            HandleOnWallHit();
             HandleGameModeBehaviour();
         }
         private void HandleMovement()
@@ -44,6 +45,17 @@ namespace GameAssets.Scripts.Player
             Observable.EveryFixedUpdate().Subscribe(_ => { Invoke(currentGameMode.ToString(), 0); }).AddTo(gameObject);
         }
 
+        private void HandleOnWallHit()
+        {
+            Observable.EveryFixedUpdate().Subscribe(_ =>
+            {
+                if (TouhcWall())
+                {
+                    SceneLoader.ReloadScene();
+                }
+            }).AddTo(gameObject);
+        }
+        
         private void Cube()
         {
             if (OnGrounded())
@@ -61,8 +73,7 @@ namespace GameAssets.Scripts.Player
                 playerSprite.Rotate(Vector3.back, _gravity * rotationSpeed * Time.deltaTime);
             }
         }
-    
-
+        
         private void Ship()
         { 
             playerSprite.rotation = Quaternion.Euler(0, 0, rb.velocity.y * 2);
