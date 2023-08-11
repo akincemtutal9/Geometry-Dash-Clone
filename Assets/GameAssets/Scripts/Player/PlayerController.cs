@@ -29,7 +29,6 @@ namespace GameAssets.Scripts.Player
             LimitFallSpeed();
             HandleGameModeBehaviour();
         }
-
         private void HandleMovement()
         {
             Observable.EveryFixedUpdate()
@@ -66,7 +65,7 @@ namespace GameAssets.Scripts.Player
 
         private void Ship()
         { 
-            transform.rotation = Quaternion.Euler(0, 0, rb.velocity.y * 2);
+            playerSprite.rotation = Quaternion.Euler(0, 0, rb.velocity.y * 2);
 
             if (Input.GetMouseButton(0))
                 rb.gravityScale = -4.314969f;
@@ -94,9 +93,9 @@ namespace GameAssets.Scripts.Player
         {
             Observable.EveryFixedUpdate().Subscribe(_ =>
             {
-                if (rb.velocity.y < -24f)
+                if ((rb.velocity.y  * _gravity) < -24.2f)
                 {
-                    rb.velocity = new Vector2(rb.velocity.x, -24f);
+                    rb.velocity = new Vector2(rb.velocity.x, -24.2f * _gravity);
                 }
             }).AddTo(gameObject);
         }
