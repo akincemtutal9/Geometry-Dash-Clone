@@ -6,12 +6,12 @@ namespace GameAssets.Scripts.Player
 {
     public class PlayerController : MonoBehaviour
     {
-        private readonly float[] speedValues = {8.6f,12.96f,19,27f};
         [Header("Enum")]
         [SerializeField] private MoveSpeed currentMoveSpeed;
         [SerializeField] private GameModes currentGameMode;
         
         [Header("References")]
+        [SerializeField] private float[] speedValues = {8.6f, 12.96f, 19.27f};
         [SerializeField] private Transform groundCheckTransform;
         [SerializeField] private LayerMask groundMask;
         [SerializeField] private Transform playerSprite;
