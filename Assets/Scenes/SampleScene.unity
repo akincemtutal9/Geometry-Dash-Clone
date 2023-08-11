@@ -461,7 +461,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 30355709}
-  - {fileID: 2145856514}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -506,15 +505,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentMoveSpeed: 0
   currentGameMode: 0
-  speedValues:
-  - 8.6
-  - 12.96
-  - 19.72
-  groundCheckTransform: {fileID: 2145856514}
   groundMask:
     serializedVersion: 2
     m_Bits: 64
   playerSprite: {fileID: 30355709}
+  speedValues:
+  - 8.6
+  - 12.96
+  - 19.72
   jumpForce: 26.6581
   rotationSpeed: 452.4152
   groundCheckRadius: 0.05
@@ -696,38 +694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b6e509c6927e5448b5f72b6db4d8f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameMode: 0
+  gameMode: 1
   speed: 2
   gravity: -1
-  state: 2
---- !u!1 &2145856513
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2145856514}
-  m_Layer: 0
-  m_Name: GroundCheckTransform
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2145856514
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2145856513}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1388003899}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  state: 1
