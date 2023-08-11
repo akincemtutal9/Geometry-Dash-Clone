@@ -1,5 +1,4 @@
 using GameAssets.Scripts.Utils;
-using UniRx;
 using UnityEngine;
 
 namespace GameAssets.Scripts.Player
@@ -25,35 +24,41 @@ namespace GameAssets.Scripts.Player
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
+        }
+
+        private void Update()
+        {
             HandleMovement();
             LimitFallSpeed();
-            HandleOnWallHit();
-            HandleGameModeBehaviour();
+
+            if (currentGameMode == GameModes.Cube)
+            {
+                Cube();
+            }
+            else if (currentGameMode == GameModes.Ship)
+            {
+                Ship();
+            }
+            //HandleGameModeBehaviour();
         }
+
         private void HandleMovement()
         {
-            Observable.EveryFixedUpdate()
-                .Subscribe(_ =>
-                {
-                    var moveSpeedIndex = (int)currentMoveSpeed;
-                    transform.position += Vector3.right * speedValues[moveSpeedIndex] * Time.deltaTime;
-                }).AddTo(this);
+            var moveSpeedIndex = (int)currentMoveSpeed; 
+            transform.position += Vector3.right * (speedValues[moveSpeedIndex] * Time.deltaTime);
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private void HandleGameModeBehaviour()
         {
-            Observable.EveryFixedUpdate().Subscribe(_ => { Invoke(currentGameMode.ToString(), 0); }).AddTo(gameObject);
+             Invoke(currentGameMode.ToString(), 0); 
         }
-
         private void HandleOnWallHit()
         {
-            Observable.EveryFixedUpdate().Subscribe(_ =>
+            if (TouchWall())
             {
-                if (TouhcWall())
-                {
-                    SceneLoader.ReloadScene();
-                }
-            }).AddTo(gameObject);
+                SceneLoader.ReloadScene();
+            }
         }
         
         private void Cube()
@@ -92,25 +97,31 @@ namespace GameAssets.Scripts.Player
         }
         private bool OnGrounded()
         {
-            return Physics2D.OverlapBox(transform.position + Vector3.down * _gravity * 0.5f, Vector2.right * 1.1f + Vector2.up * groundCheckRadius, 0, groundMask);
+            Vector3 downOffset = Vector3.down * _gravity * 0.5f;
+            Vector2 rightSize = Vector2.right * 1.1f;
+            Vector2 upSize = Vector2.up * groundCheckRadius;
+
+            Vector3 position = transform.position + downOffset;
+            Vector2 size = rightSize + upSize;
+
+            return Physics2D.OverlapBox(position, size, 0, groundMask);
         }
-        private bool TouhcWall()
+        private bool TouchWall()
         {
-            return Physics2D.OverlapBox((Vector2)transform.position + (Vector2.right * 0.55f),
-                Vector2.up * 0.8f + (Vector2.right * groundCheckRadius), 0, groundMask);
+            Vector2 offset = Vector2.right * 0.55f;
+            Vector2 size = new Vector2(groundCheckRadius * 2, 0.8f);
+            Vector2 position = (Vector2)transform.position + offset;
+
+            return Physics2D.OverlapBox(position, size, 0, groundMask);
         }
 
         private void LimitFallSpeed()
         {
-            Observable.EveryFixedUpdate().Subscribe(_ =>
+            if ((rb.velocity.y  * _gravity) < -24.2f)
             {
-                if ((rb.velocity.y  * _gravity) < -24.2f)
-                {
-                    rb.velocity = new Vector2(rb.velocity.x, -24.2f * _gravity);
-                }
-            }).AddTo(gameObject);
+                rb.velocity = new Vector2(rb.velocity.x, -24.2f * _gravity);
+            }
         }
-
         public void ChangeThroughPortal(MoveSpeed moveSpeed, GameModes gameMode , Gravity gravity, int state)
         {
             switch (state)
@@ -127,5 +138,35 @@ namespace GameAssets.Scripts.Player
                     break;
             }
         }
+        
+        private void OnDrawGizmosSelected()
+        {
+            DrawGizmoForOnGrounded();
+            DrawGizmoForTouchWall();
+        }
+
+        private void DrawGizmoForOnGrounded()
+        {
+            Vector3 downOffset = Vector3.down * _gravity * 0.5f;
+            Vector2 rightSize = Vector2.right * 1.1f;
+            Vector2 upSize = Vector2.up * groundCheckRadius;
+
+            Vector3 position = transform.position + downOffset;
+            Vector2 size = rightSize + upSize;
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(position, new Vector3(size.x, size.y, 0.1f));
+        }
+
+        private void DrawGizmoForTouchWall()
+        {
+            Vector2 offset = Vector2.right * 0.55f;
+            Vector2 size = new Vector2(groundCheckRadius * 2, 0.8f);
+            Vector2 position = (Vector2)transform.position + offset;
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireCube(position, new Vector3(size.x, size.y, 0.1f));
+        }
+        
     }
 }
