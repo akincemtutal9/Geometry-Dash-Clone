@@ -1,14 +1,15 @@
+using GameAssets.Scripts.Utils;
 using UniRx;
 using UnityEngine;
 
 namespace GameAssets.Scripts.Player
 {
-    public enum MoveSpeed{Slow = 0 , Fast = 1 , VeryFast = 2};
     public class PlayerController : MonoBehaviour
     {
         private readonly float[] speedValues = {8.6f,12.96f,19,27f};
         [Header("Enum")]
         [SerializeField] private MoveSpeed currentMoveSpeed;
+        [SerializeField] private GameModes currentGameMode;
         
         [Header("References")]
         [SerializeField] private Transform groundCheckTransform;
@@ -68,6 +69,22 @@ namespace GameAssets.Scripts.Player
         private bool OnGrounded()
         {
             return Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, groundMask);
+        }
+
+        public void ChangeThroughPortal(MoveSpeed moveSpeed, GameModes gameMode , Gravity gravity, int state)
+        {
+            switch (state)
+            {
+                case 0:
+                    currentMoveSpeed = moveSpeed;
+                    break;
+                case 1:
+                    currentGameMode = gameMode;
+                    break;
+                case 2:
+                    rb.gravityScale = Mathf.Abs(rb.gravityScale) * (int)gravity;
+                    break;
+            }
         }
     }
 }
