@@ -32,7 +32,7 @@ namespace GameAssets.Scripts.Player
 
         private void HandleMovement()
         {
-            Observable.EveryUpdate()
+            Observable.EveryFixedUpdate()
                 .Subscribe(_ =>
                 {
                     var moveSpeedIndex = (int)currentMoveSpeed;
@@ -42,7 +42,7 @@ namespace GameAssets.Scripts.Player
 
         private void HandleGameModeBehaviour()
         {
-            Observable.EveryUpdate().Subscribe(_ => { Invoke(currentGameMode.ToString(), 0); }).AddTo(gameObject);
+            Observable.EveryFixedUpdate().Subscribe(_ => { Invoke(currentGameMode.ToString(), 0); }).AddTo(gameObject);
         }
 
         private void Cube()
@@ -67,13 +67,13 @@ namespace GameAssets.Scripts.Player
         private void Ship()
         { 
             transform.rotation = Quaternion.Euler(0, 0, rb.velocity.y * 2);
-            
+
             if (Input.GetMouseButton(0))
                 rb.gravityScale = -4.314969f;
-            else 
+            else
                 rb.gravityScale = 4.314969f;
             rb.gravityScale *= _gravity;
-            }
+        }
         
         private void Jump()
         {
