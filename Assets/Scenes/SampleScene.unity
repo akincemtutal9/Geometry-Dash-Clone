@@ -507,7 +507,7 @@ MonoBehaviour:
   currentMoveSpeed: 0
   currentGameMode: 0
   speedValues:
-  - 1
+  - 8.6
   - 12.96
   - 19.72
   groundCheckTransform: {fileID: 2145856514}
@@ -516,7 +516,7 @@ MonoBehaviour:
     m_Bits: 64
   playerSprite: {fileID: 30355709}
   jumpForce: 26.6581
-  rotationSpeed: 5
+  rotationSpeed: 452.4152
   groundCheckRadius: 0.05
 --- !u!61 &1388003902
 BoxCollider2D:
@@ -698,8 +698,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameMode: 0
   speed: 2
-  gravity: 0
-  state: 0
+  gravity: -1
+  state: 2
 --- !u!1 &2145856513
 GameObject:
   m_ObjectHideFlags: 0
