@@ -7,11 +7,18 @@ namespace GameAssets.Scripts.Player
     public class PlayerController : MonoBehaviour
     {
         private readonly float[] speedValues = {8.6f,12.96f,19,27f};
+        [Header("Enum")]
         [SerializeField] private MoveSpeed currentMoveSpeed;
-        [SerializeField] private float jumpForce = 10f;
+        
+        [Header("References")]
         [SerializeField] private Transform groundCheckTransform;
-        [SerializeField] private float groundCheckRadius;
         [SerializeField] private LayerMask groundMask;
+        [SerializeField] private Transform playerSprite;
+        
+        [Header("Settings")]
+        [SerializeField] private float jumpForce = 10f;
+        [SerializeField] private float rotationSpeed = 5f;
+        [SerializeField] private float groundCheckRadius;
         
         private Rigidbody2D rb;
         
@@ -34,8 +41,23 @@ namespace GameAssets.Scripts.Player
         private void HandleJumpInput()
         {
             Observable.EveryFixedUpdate()
-                .Where(_ => Input.GetMouseButton(0) && OnGrounded()) 
-                .Subscribe(_ => Jump())
+                .Subscribe(_ =>
+                {
+                    if (OnGrounded())
+                    {
+                        var rotation = playerSprite.rotation.eulerAngles;
+                        rotation.z = Mathf.Round(rotation.z / 90) * 90;
+                        playerSprite.rotation = Quaternion.Euler(rotation); // Complete the rotation
+                        if (Input.GetMouseButton(0))
+                        {
+                            Jump();
+                        }
+                    }
+                    else
+                    {
+                        playerSprite.Rotate(Vector3.back * rotationSpeed);
+                    }
+                })
                 .AddTo(this);
         }
         private void Jump()
