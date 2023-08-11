@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameAssets.Scripts.Portal
 {
-    public abstract class PortalBehaviour : MonoBehaviour
+    public class PortalBehaviour : MonoBehaviour
     {
         [SerializeField] private GameModes gameMode;
         [SerializeField] private MoveSpeed speed;
