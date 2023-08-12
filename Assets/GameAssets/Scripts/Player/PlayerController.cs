@@ -11,6 +11,7 @@ namespace GameAssets.Scripts.Player
         [Header("References")] 
         [SerializeField] private LayerMask groundMask;
         [SerializeField] private Transform playerSprite;
+        [SerializeField] private SpriteRenderer sprite;
 
         [Header("Settings")] 
         [SerializeField] private float[] speedValues = { };
@@ -36,10 +37,12 @@ namespace GameAssets.Scripts.Player
             if (currentGameMode == GameModes.Cube)
             {
                 Cube();
+                sprite.color = Color.white;
             }
             else if (currentGameMode == GameModes.Ship)
             {
                 Ship();
+                sprite.color = Color.black;
             }
             //HandleGameModeBehaviour();
         }
