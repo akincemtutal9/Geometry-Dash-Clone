@@ -32,7 +32,7 @@ namespace GameAssets.Scripts.Player
         {
             HandleMovement();
             LimitFallSpeed();
-
+            HandleOnWallHit();
             if (currentGameMode == GameModes.Cube)
             {
                 Cube();
