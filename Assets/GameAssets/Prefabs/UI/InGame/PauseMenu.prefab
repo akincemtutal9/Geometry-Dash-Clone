@@ -458,6 +458,8 @@ GameObject:
   - component: {fileID: 5027175380689367992}
   - component: {fileID: 5178951973219143802}
   - component: {fileID: 1665854838202586542}
+  - component: {fileID: 3070757610048428070}
+  - component: {fileID: 5368657273925774580}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -567,7 +569,55 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5178951973219143802}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3070757610048428070}
+        m_TargetAssemblyTypeName: GameAssets.Scripts.Utils.SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Main-Menu
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5368657273925774580}
+        m_TargetAssemblyTypeName: GameAssets.Scripts.Utils.GameTime, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Main-Menu
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3070757610048428070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6969626189989356833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ce0a12711a5544980e0fb42bf124e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5368657273925774580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6969626189989356833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a097312f4f4a6c41820953afe0f7a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7024687544244578918
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,6 +776,7 @@ GameObject:
   - component: {fileID: 4964620691578888410}
   - component: {fileID: 247250697019007971}
   - component: {fileID: 5308130918210618619}
+  - component: {fileID: 9214465672449682578}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -860,3 +911,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 9214465672449682578}
+        m_TargetAssemblyTypeName: GameAssets.Scripts.Utils.GameTime, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &9214465672449682578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8257064329024501028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a097312f4f4a6c41820953afe0f7a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

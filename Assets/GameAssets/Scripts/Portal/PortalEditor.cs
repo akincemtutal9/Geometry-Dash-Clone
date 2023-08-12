@@ -1,7 +1,11 @@
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 namespace GameAssets.Scripts.Portal
 {
+    
+    #if UNITY_EDITOR
     [CustomEditor(typeof(PortalBehaviour)), CanEditMultipleObjects]
     
     // By using this editor we avoid possible confusion when defining portal behaviors
@@ -79,4 +83,5 @@ namespace GameAssets.Scripts.Portal
             serializedObject.FindProperty("state").intValue = propNumber;
         }
     }
+    #endif
 }
