@@ -17,6 +17,8 @@ namespace GameAssets.Scripts.Player
         [SerializeField] private float jumpForce = 10f;
         [SerializeField] private float rotationSpeed = 5f;
         [SerializeField] private float groundCheckRadius;
+        [SerializeField] private float shipGravityScale;
+        [SerializeField] private float cubeGravityScale;
 
         private Rigidbody2D rb;
         private int _gravity = 1;
@@ -48,11 +50,12 @@ namespace GameAssets.Scripts.Player
             transform.position += Vector3.right * (speedValues[moveSpeedIndex] * Time.deltaTime);
         }
 
-        // ReSharper disable Unity.PerformanceAnalysis
+        /**
         private void HandleGameModeBehaviour()
         {
              Invoke(currentGameMode.ToString(), 0); 
         }
+        */
         private void HandleOnWallHit()
         {
             if (TouchWall())
@@ -65,6 +68,7 @@ namespace GameAssets.Scripts.Player
         {
             if (OnGrounded())
             {
+            
                 var rotation = playerSprite.rotation.eulerAngles;
                 rotation.z = Mathf.Round(rotation.z / 90) * 90;
                 playerSprite.rotation = Quaternion.Euler(rotation); // Complete the rotation
@@ -77,6 +81,8 @@ namespace GameAssets.Scripts.Player
             {
                 playerSprite.Rotate(Vector3.back, _gravity * rotationSpeed * Time.deltaTime);
             }
+
+            rb.gravityScale = cubeGravityScale * _gravity;
         }
         
         private void Ship()
@@ -84,9 +90,9 @@ namespace GameAssets.Scripts.Player
             playerSprite.rotation = Quaternion.Euler(0, 0, rb.velocity.y * 2);
 
             if (Input.GetMouseButton(0))
-                rb.gravityScale = -4.314969f;
+                rb.gravityScale = -shipGravityScale;
             else
-                rb.gravityScale = 4.314969f;
+                rb.gravityScale = shipGravityScale;
             rb.gravityScale *= _gravity;
         }
         
