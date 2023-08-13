@@ -1,5 +1,6 @@
 # Geometry-Dash-Clone
-Geometry Dash Clone Unity Game - Giant Avocado Task
+Geometry Dash Clone Unity Game: Giant Avocado Task
+## Assets/GameAssets folder is the folder where I work; the other folders are came with initial project or the assets that i downloaded!
 
 # Game Mechanics
 
